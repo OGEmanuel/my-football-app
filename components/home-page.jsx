@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 
 const h1Variant = {
   hidden: {
@@ -74,7 +75,8 @@ const HomePage = props => {
         className="grid grid-cols-2 gap-x-5 gap-y-10 w-max mx-auto md:gap-y-5 md:grid-cols-3 md:gap-x-10 xl:gap-y-20"
       >
         {countries.map(country => (
-          <div
+          <Link
+            href={`/${country.country_name}-${country.country_id}`}
             key={country.country_id}
             className="grid grid-rows-[max-content,_1fr] gap-2.5 shadow-2xl rounded-lg bg-[#e5c685] p-2.5"
           >
@@ -84,7 +86,7 @@ const HomePage = props => {
               alt="flag"
               className="w-full h-full"
             />
-          </div>
+          </Link>
         ))}
       </motion.div>
     </div>

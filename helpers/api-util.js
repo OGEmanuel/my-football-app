@@ -1,11 +1,15 @@
 import axios from 'axios';
 
-export const getAllData = async (action, apiKey) => {
+const URL = 'https://apiv3.apifootball.com';
+const API_KEY =
+  '7e702b279fbdfc88ba4fc2ba1c668e72409adabb24f767abbb18261e21dd593f';
+
+export const getAllData = async action => {
   try {
-    const response = await axios.get('https://apiv3.apifootball.com', {
+    const response = await axios.get(URL, {
       params: {
         action: action,
-        APIkey: apiKey,
+        APIkey: API_KEY,
       },
     });
     const data = response.data;
@@ -15,8 +19,8 @@ export const getAllData = async (action, apiKey) => {
   }
 };
 
-export const getEuropesTopLeagues = async (action, apiKey) => {
-  const leagues = await getAllData(action, apiKey);
+export const getEuropesTopLeagues = async action => {
+  const leagues = await getAllData(action);
 
   const topLeagues = [
     leagues[2],
@@ -29,3 +33,7 @@ export const getEuropesTopLeagues = async (action, apiKey) => {
 
   return topLeagues;
 };
+
+export function getCountryById(countries, id) {
+  return countries.find(country => country.country_id === id);
+}
