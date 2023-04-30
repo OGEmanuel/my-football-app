@@ -42,7 +42,7 @@ const HomePage = props => {
   const { countries } = props;
 
   return (
-    <div className="grid items-center h-screen px-5 my-10 gap-5 mx-auto max-w-[30rem] md:gap-10 md:max-w-[50rem] md:px-10 xl:my-0 xl:grid-cols-2 justify-between xl:max-w-[1440px]">
+    <div className="grid w-max items-center px-5 h-screen my-10 gap-5 mx-auto max-w-[30rem] md:gap-10 md:max-w-[50rem] md:px-10 xl:my-0 xl:grid-cols-2 justify-between xl:max-w-[1440px]">
       <div className="relative">
         <div className="absolute top-0 -left-4 w-52 h-52 mix-blend-multiply filter blur-xl opacity-70 bg-purple-300 rounded-full animate-blob md:w-72 md:h-72"></div>
         <div className="absolute top-0 right-40 w-52 h-52 mix-blend-multiply filter blur-xl opacity-70 bg-yellow-300 rounded-full animate-blob animation-delay-2000 md:w-72 md:h-72"></div>
