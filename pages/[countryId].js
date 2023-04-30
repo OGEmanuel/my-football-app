@@ -1,41 +1,61 @@
-import { getCountryById } from '@/helpers/api-util';
-import { selectCountry } from '@/redux-store/features/countriesSlice';
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { getAllData, getEuropesTopLeagues } from '@/helpers/api-util';
+import { useEffect, useState } from 'react';
 
 const ACTION = 'get_countries';
-const API_KEY =
-  '7e702b279fbdfc88ba4fc2ba1c668e72409adabb24f767abbb18261e21dd593f';
+const leagueAction = 'get_leagues';
 
 const CountryDetailsPage = props => {
-  const { countryDetails } = props;
-  console.log(countryDetails);
-  //   const dispatch = useDispatch();
-  //   const selectCountry = useSelector(state => state.select.country);
+  const [mensTopflightLeague, setMensTopflightLeague] = useState([]);
+  const { countryId, leagueDetails } = props;
 
-  //   useEffect(() => {
-  //     dispatch(selectCountry(countries));
-  //   }, []);
+  useEffect(() => {
+    if (countryId === '44') {
+      setMensTopflightLeague(
+        leagueDetails
+          .map(details => details)
+          .find(details => details.league_id === '152')
+      );
+    } else if (countryId === '82' && countryId === '92') {
+      setMensTopflightLeague(leagueDetails[0]);
+    } else setMensTopflightLeague(leagueDetails[1]);
+  }, [countryId]);
+
+  console.log(mensTopflightLeague);
 
   return (
     <>
-      <h1>Country Details</h1>
+      {mensTopflightLeague.length < 1 && <p>Loading...</p>}
+      <p>League name: {mensTopflightLeague.league_name}</p>
+      <p>League season: {mensTopflightLeague.league_season}</p>
+      <img src={mensTopflightLeague.league_logo} alt="League Logo" />
+      <img src={mensTopflightLeague.country_logo} alt="Country Logo" />
     </>
   );
 };
 
 export const getStaticProps = async context => {
-  const countries = await getEuropesTopLeagues(ACTION, API_KEY);
   const countryId = context.params.countryId;
-  const countryDetails = getCountryById(countries, countryId);
+  const leagueDetails = await getAllData(leagueAction, countryId);
 
   return {
     props: {
-      countryDetails,
+      countryId,
+      leagueDetails,
     },
   };
 };
 
-// export const getStaticPaths =
+export const getStaticPaths = async () => {
+  const leagues = await getEuropesTopLeagues(ACTION);
+
+  const paths = leagues.map(league => ({
+    params: { countryId: league.country_id },
+  }));
+
+  return {
+    paths,
+    fallback: false,
+  };
+};
 
 export default CountryDetailsPage;

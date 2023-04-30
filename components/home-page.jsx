@@ -76,7 +76,7 @@ const HomePage = props => {
       >
         {countries.map(country => (
           <Link
-            href={`/${country.country_name}-${country.country_id}`}
+            href={`/${country.country_id}`}
             key={country.country_id}
             className="grid grid-rows-[max-content,_1fr] gap-2.5 shadow-2xl rounded-lg bg-[#e5c685] p-2.5"
           >
