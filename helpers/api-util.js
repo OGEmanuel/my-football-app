@@ -4,12 +4,13 @@ const URL = 'https://apiv3.apifootball.com';
 const API_KEY =
   '7e702b279fbdfc88ba4fc2ba1c668e72409adabb24f767abbb18261e21dd593f';
 
-export const getAllData = async (action, id) => {
+export const getAllData = async (action, countryId, leagueId) => {
   try {
     const response = await axios.get(URL, {
       params: {
         action: action,
-        country_id: id,
+        country_id: countryId,
+        league_id: leagueId,
         APIkey: API_KEY,
       },
     });

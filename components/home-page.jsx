@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import Link from 'next/link';
 
 const h1Variant = {
@@ -42,7 +43,7 @@ const HomePage = props => {
   const { countries } = props;
 
   return (
-    <div className="grid w-max items-center px-5 h-screen my-10 gap-5 mx-auto max-w-[30rem] md:gap-10 md:max-w-[50rem] md:px-10 xl:my-0 xl:grid-cols-2 justify-between xl:max-w-[1440px]">
+    <div className="grid w-max items-center px-5 min-h-screen my-10 gap-5 mx-auto max-w-[30rem] justify-between md:gap-10 md:max-w-[50rem] md:px-10 xl:my-0 xl:grid-cols-2 xl:w-auto xl:max-w-[1440px]">
       <div className="relative">
         <div className="absolute top-0 -left-4 w-52 h-52 mix-blend-multiply filter blur-xl opacity-70 bg-purple-300 rounded-full animate-blob md:w-72 md:h-72"></div>
         <div className="absolute top-0 right-40 w-52 h-52 mix-blend-multiply filter blur-xl opacity-70 bg-yellow-300 rounded-full animate-blob animation-delay-2000 md:w-72 md:h-72"></div>
@@ -51,7 +52,7 @@ const HomePage = props => {
           variants={h1Variant}
           initial="hidden"
           animate="visible"
-          className="font-bold text-3xl mt-5 md:text-7xl"
+          className="font-bold text-3xl xl:mt-5 md:text-7xl"
         >
           Welcome to{' '}
           <span className="block ml-12 text-[#0a4f90]">My Football App</span>
@@ -81,10 +82,12 @@ const HomePage = props => {
             className="grid grid-rows-[max-content,_1fr] gap-2.5 shadow-2xl rounded-lg bg-[#e5c685] p-2.5"
           >
             <p className="text-2xl font-semibold">{country.country_name}</p>
-            <img
+            <Image
               src={country.country_logo}
               alt="flag"
               className="w-full h-full"
+              width={160}
+              height={106.66}
             />
           </Link>
         ))}
